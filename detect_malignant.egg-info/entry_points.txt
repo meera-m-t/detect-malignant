@@ -1,3 +1,0 @@
-[console_scripts]
-detect-malignant = detect_malignant.__main__:run
-

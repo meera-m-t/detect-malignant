@@ -1,0 +1,49 @@
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# Python Scripts
+create_newcsv.py
+
+# Jupyter Notebooks
+.ipynb_checkpoints/
+*.ipynb
+
+# Runtime Data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# JavaScript Coverage
+lib-cov/
+coverage/
+*.lcov
+
+# Images
+*.jpg
+*.png
+
+# Data files
+*.csv
+*.pt
+*.pth
+*.pkl
+
+# Temporary folders
+tmp/
+masks/
+images/
+data/
+
+
+# Python Egg Info
+*.egg-info/
+
+# Swap Files
+*.swp
+
