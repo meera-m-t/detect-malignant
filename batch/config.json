@@ -1,5 +1,5 @@
 {
-    "exp_name": "exp1",   
+    "exp_name": "exp2",   
     "model_name": "SENet",
     "model_kwargs": {
         
@@ -12,8 +12,8 @@
     "batch_size": 200,
     "imsize": 224,    
     "early_stopping_kwargs": {
-      "patience": 20,
-      "min_delta": 0.001,
+      "patience": 10,
+      "min_delta": 0.01,
       "watched_metric": "macro_f1",
       "watched_metric_polarity": "Positive"
     },
@@ -33,7 +33,7 @@
     },
     "kwargs_augmentation": {
         "p": 1,
-        "setting": 0
+        "setting": 5
       },   
     "loss": "MalignantLoss",
     "loss_kwargs": {
@@ -55,8 +55,8 @@
       "weight_decay": 0.01,
       "cbs": [
         "best_save_cb",
-        "save_train_result_cb",        
-        "early_stoppping_cb"
+        "save_train_result_cb"       
+        
     
       ],
       "lr": 1e-01,

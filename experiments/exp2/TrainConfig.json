@@ -1,5 +1,5 @@
 {
-  "exp_name": "exp1",
+  "exp_name": "exp2",
   "model_name": "SENet",
   "save_dir": "experiments",
   "mode": "train",
@@ -52,7 +52,7 @@
   "dataset": "MalignantDataset",
   "kwargs_augmentation": {
     "p": 1,
-    "setting": 0
+    "setting": 5
   },
   "one_hot_labels": false,
   "kwagrs_learner": {

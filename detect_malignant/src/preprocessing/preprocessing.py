@@ -119,10 +119,11 @@ class CustomCombinedTransform:
 
 
 
-    def tv_transform(self, imsize=299):
+    def tv_transform(self, imsize=224):
         tv_transform = T.Compose(
             [
-                T.ToPILImage(),             
+                T.ToPILImage(),  
+                T.Resize((imsize, imsize)),           
                 T.ToTensor(),
                 T.Normalize(mean=[0.5, 0.5, 0.5], std=[0.5, 0.5, 0.5]),
             ]

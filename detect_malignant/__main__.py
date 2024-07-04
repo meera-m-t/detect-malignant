@@ -4,7 +4,7 @@ import ssl
 
 from detect_malignant.src.configs.config import ExperimentationConfig
 # from detect_malignant.finetune import finetune
-# from detect_malignant.test.test import test
+from detect_malignant.test.test import test
 from detect_malignant.train import train
 
 
@@ -42,15 +42,15 @@ class TrainingExecutor(Executor):
         train(train_settings)
 
 
-class FinetuneExecutor(Executor):
-    def __init__(self, args):
-        super(FinetuneExecutor, self).__init__(args)
-        assert self.config is not None, "need configuration file for training provided"
-        self.config["mode"] = args.mode  # update the mode value from config
+# class FinetuneExecutor(Executor):
+#     def __init__(self, args):
+#         super(FinetuneExecutor, self).__init__(args)
+#         assert self.config is not None, "need configuration file for training provided"
+#         self.config["mode"] = args.mode  # update the mode value from config
 
-    def execute(self):
-        finetune_settings = ExperimentationConfig.parse_obj(self.config)
-        finetune(finetune_settings)
+#     def execute(self):
+#         finetune_settings = ExperimentationConfig.parse_obj(self.config)
+#         finetune(finetune_settings)
 
 
 class TestingExecutor(Executor):
@@ -66,7 +66,7 @@ class TestingExecutor(Executor):
 
 EXECUTORS = {
     "train": TrainingExecutor,
-    # "test": TestingExecutor,
+    "test": TestingExecutor,
     # "finetune": FinetuneExecutor,
 }
 

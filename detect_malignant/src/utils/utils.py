@@ -1,17 +1,16 @@
 import argparse
 import glob
-import math
-import random
-from os import listdir, makedirs, path
-from typing import List, Optional
-
 import cv2
-import numpy as np
-import pandas as pd
+import random
 import torch
 import torchvision.transforms as T
+
+
+
 from PIL import Image
 from torchvision.utils import save_image
+from os import  makedirs, path
+from typing import List, Optional
 
 
 class SimpleLogger:
@@ -98,22 +97,6 @@ def get_image_tensors(image_directory: str, img_size: int, limit=100):
     return torch.stack(tensors)
 
 
-def remap_y_column(df, y_map, y_ref_col="Species_Name"):
-    df["y"] = df[y_ref_col].map(y_map)
-    return df
-
-
-def get_species_map_from_csv(df_fn):
-    df = pd.read_csv(df_fn)
-    return get_species_map(df)
-
-
-def get_species_map(df):
-    species_map = {}
-    df = df[df["Species_Name"].notna()]
-    for i, species in enumerate(df.Species_Name.unique()):
-        species_map[species] = df["y"].loc[df.Species_Name == species].iloc[0]
-    return species_map
 
 
 def clean_df(df, mc=False):
@@ -130,61 +113,6 @@ def trim_ghost_imgs(df):
         img_fn = df.loc[i, "Id"]
         if not path.exists(img_fn):
             df = df.drop(i)
-    return df
-
-
-def sub_split(ids, ratio):
-    trainlist, vallist, testlist = np.split(ids, [int(ratio[0] * len(ids)), int((ratio[0] + ratio[1]) * len(ids))])
-    return trainlist, vallist, testlist
-
-
-def split_generator(
-    df,
-    splitratio=[0.7, 0.15, 0.15],
-    sort="Imaging_Date",
-    target_col="y",
-    unit_col="Specimen_Id",
-    constraint="",
-    split_col="Split",
-    verbose=False,
-):
-    df = df.copy()  # create a copy of the dataframe to avoid SettingWithCopyWarning
-    if sort in [None, ""]:
-        df = df.sample(frac=1).reset_index(drop=True)
-    else:
-        df.sort_values(sort, inplace=True)
-    df[split_col] = ""
-    ys = df[target_col].unique()
-    if -1 in ys:
-        idx = np.where(ys == -1)
-        ys = np.delete(ys, idx)
-    if constraint != "":
-        extras = df[constraint].unique()
-    train = []
-    val = []
-    test = []
-
-    for y in ys:
-        sub_df = df[df[target_col] == y]
-        if constraint != "":
-            for extra in extras:
-                subsub_df = sub_df[sub_df[constraint] == extra]
-                units = subsub_df[unit_col].unique()
-                trainlist, vallist, testlist = sub_split(units, splitratio)
-                train.extend(trainlist)
-                val.extend(vallist)
-                test.extend(testlist)
-        else:
-            units = sub_df[unit_col].unique()
-            trainlist, vallist, testlist = sub_split(units, splitratio)
-            train.extend(trainlist)
-            val.extend(vallist)
-            test.extend(testlist)
-
-    splits = {"Train": train, "Valid": val, "Test": test}
-    for split in splits:
-        df.loc[df[unit_col].isin(splits[split]), split_col] = split
-
     return df
 
 
