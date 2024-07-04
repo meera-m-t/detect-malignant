@@ -63,7 +63,7 @@ class TrainConfig(BaseModel):
         processed_kwargs = self.expconfig.kwagrs_learner.copy()
         scheduler_kwargs = self.expconfig.scheduler_kwargs
         scheduler_func = self.expconfig.schedulers[self.expconfig.scheduler]
-        # Fix the typo here; it should be cb_mapping
+  
         cb_mapping = {
             "best_save_cb": SaveBestModel(self),
             "save_train_result_cb": SaveTrainingResult(self, save_dir),           
@@ -81,7 +81,7 @@ class TrainConfig(BaseModel):
     def get_loss(self, num_classes) -> Callable:
         device = self.expconfig.device
         if self.expconfig.loss == "MalignantLoss":
-            return self.expconfig.losses[self.expconfig.loss](self.expconfig.loss_kwargs, num_classes, self.expconfig.loss_kwargs.loss_dict).to(device)
+            return self.expconfig.losses[self.expconfig.loss](self.expconfig.loss_kwargs, num_classes, self.expconfig.loss_kwargs["loss_dict"]).to(device)
         else:
             raise ValueError(f"Invalid loss: {self.expconfig.loss}")
 

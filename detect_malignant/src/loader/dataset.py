@@ -15,27 +15,22 @@ from detect_malignant.src.preprocessing.preprocessing import CustomCombinedTrans
 
 class MalignantDataset(Dataset):
     def __init__(
-        self, config, data_df, num_classes, mode, species_map=None, transform=None
+        self, config, data_df, num_classes, mode
     ):
         """
         Params:
-            data_df: data DataFrame of image name and labels
-            transform: optional data transformer
-            one_hot_label: whether to return one-hot encoded labels
-            mode: train or test/validation
-            
+            config: ExperimentationConfig object
+            data_df: data DataFrame of image name and labels   
+            mode: train or test/validation            
         """
         super().__init__()
         self.config = config
         self.exp_config = config.expconfig
         self.mode = mode
-        self.num_classes = num_classes
-        self.transform = transform
-        self.data_df = data_df      
- 
-        self.images_df = pd.read_csv(
-
-        )
+        self.num_classes = num_classes 
+        self.data_df = data_df  
+        self.imsize = self.exp_config.imsize  
+        self.images_df = pd.read_csv(self.data_df, index_col=False)
         self.prep_data_sheet()     
         self.kwargs_augmentation = self.exp_config.kwargs_augmentation
 
@@ -56,8 +51,7 @@ class MalignantDataset(Dataset):
             img_path = current_sample["Id"]
             label = current_sample["y"]    
             img = Image.open(img_path).convert("RGB")  # Load image
-
-            img = self.transform.square(img)
+                  
             img = np.array(img)
             img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
         

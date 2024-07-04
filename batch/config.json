@@ -1,5 +1,5 @@
 {
-    "exp_name": "test",   
+    "exp_name": "exp1",   
     "model_name": "SENet",
     "model_kwargs": {
         
@@ -8,11 +8,9 @@
     },
   
     "save_dir": "experiments",  
-    "epochs": 10,
+    "epochs": 100,
     "batch_size": 200,
-    "initial_model_num_classes": 43,
-    "imsize": 244,
-    "debug": false,
+    "imsize": 224,    
     "early_stopping_kwargs": {
       "patience": 20,
       "min_delta": 0.001,
@@ -25,7 +23,7 @@
     "optimizer_kwargs": {
       "mom": 0.9,
       "eps": 1e-08,
-      "lr": 1e-04
+      "lr": 1e-01
     },
     "scheduler": "SchedCos",
     "scheduler_kwargs": {
@@ -33,7 +31,10 @@
       "end": 1e-09
       
     },
-   
+    "kwargs_augmentation": {
+        "p": 1,
+        "setting": 0
+      },   
     "loss": "MalignantLoss",
     "loss_kwargs": {
         "loss_dict": {
@@ -42,8 +43,8 @@
             "mag_scale": 1.0,
             "gamma": 3.0
           }
-        },
-        "genus": false
+        }
+        
       }
     ,
     "metrics": [
@@ -54,12 +55,11 @@
       "weight_decay": 0.01,
       "cbs": [
         "best_save_cb",
-        "save_train_result_cb",
-        "lr_sched_cb",
+        "save_train_result_cb",        
         "early_stoppping_cb"
     
       ],
-      "lr": 1e-04,
+      "lr": 1e-01,
       "extra_train_args": {}
     },
     "datasheet_path": "datasheets/data.csv"

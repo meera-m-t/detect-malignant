@@ -115,7 +115,13 @@ class ExperimentationConfig(BaseModel):
 
     dataset: str = Field(default="MalignantDataset", description="The dataset to use")
 
+    kwargs_augmentation: Optional[Dict] = Field(default={}, description="The keyword arguments for the augmentation")
 
+    one_hot_labels: bool = Field(default=False, description="Whether the labels are one-hot encoded")
+
+    kwagrs_learner: Optional[Dict] = Field(default={}, description="The keyword arguments for the learner")
+
+    verbose: bool = Field(default=False, description="Whether to print verbose information")
     
 
     @validator("mode", always=True)

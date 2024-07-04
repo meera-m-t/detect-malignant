@@ -78,7 +78,8 @@ def train_model(model, config, config_paths, config_train, num_classes, logger):
         learn = torch.nn.DataParallel(learn, device_ids=config.device_ids) 
         learn = learn.module 
 
-    cbs = config_train.get_callbacks(model, learn, save_dir)
+    cbs = config_train.get_callbacks(learn, save_dir)
+   
     logger.log(f"STARTING LEARNER WITH exp_dir: {save_dir}")   
     learn.fit_one_cycle(config.epochs, cbs=cbs)
      
@@ -92,7 +93,7 @@ def train(config: ExperimentationConfig):
     logger = SimpleLogger(config.model_name + "-Trainer")    
 
     logger.log(json.dumps(config.dict(exclude_none=True), indent=2))
-    config_train.save_processed_datasets()
+    
     Model = config_train.get_model()
 
     logger.log(f"Using model {config.model_name}")
