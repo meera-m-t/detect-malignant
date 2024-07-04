@@ -1,6 +1,6 @@
 {
   "exp_name": "exp2",
-  "model_name": "SENet",
+  "model_name": "DenseNet",
   "save_dir": "experiments",
   "mode": "train",
   "epochs": 100,
@@ -26,7 +26,7 @@
   },
   "model_kwargs": {
     "num_classes": 2,
-    "pretrained": "imagenet"
+    "pretrained": true
   },
   "loss": "MalignantLoss",
   "loss_kwargs": {
@@ -52,7 +52,7 @@
   "dataset": "MalignantDataset",
   "kwargs_augmentation": {
     "p": 1,
-    "setting": 5
+    "setting": 0
   },
   "one_hot_labels": false,
   "kwagrs_learner": {

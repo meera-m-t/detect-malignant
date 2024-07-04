@@ -59,7 +59,7 @@ class TrainConfig(BaseModel):
 
 
     def get_callbacks(self, learner, save_dir: Path):
-        verbose = self.expconfig.verbose   
+        verbose = self.expconfig.verbose 
         processed_kwargs = self.expconfig.kwagrs_learner.copy()
         scheduler_kwargs = self.expconfig.scheduler_kwargs
         scheduler_func = self.expconfig.schedulers[self.expconfig.scheduler]

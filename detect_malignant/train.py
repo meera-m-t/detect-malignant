@@ -54,7 +54,7 @@ def train_model(model, config, config_paths, config_train, num_classes, logger):
 
     data = DataLoaders(*get_fastai_dataloaders(config, train_set, valid_set), device=config.device  )  
    
-    logger.log(summary(model=model, input_size=train_set[0][0].shape))
+    # logger.log(summary(model=model, input_size=train_set[0][0].shape))
   
     # defining the optimizer, loss function, metrics and callbacks
     opt_func = config_train.get_optimizer()

@@ -114,12 +114,10 @@ def generate_confusion_matrix(y_true, y_pred, names, confusion_matrix_path, save
         num_classes = len(cm_df)
 
         # Scale based on the number of classes
-        scale_factor = 1
-        if num_classes > 35:
-            scale_factor *= 2.5  # Increase the scaling factor by 50% for more than 35 classes
+        scale_factor = 1      
 
-        fontsize_base = max(12, 16 * scale_factor)
-        title_fontsize = fontsize_base + 8
+        fontsize_base = max(5, 8 * scale_factor)
+        title_fontsize = fontsize_base + 4
         tick_fontsize = fontsize_base + 4
 
         # Adjust figure size based on the number of classes

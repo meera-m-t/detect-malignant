@@ -33,7 +33,8 @@ setup(
     packages=find_packages(),
     include_package_data=True,
     install_requires=[
-        "timm",        
+        "timm", 
+        "densenet_pytorch",       
         "tensorboard",
         "seaborn",
         "IPython",       

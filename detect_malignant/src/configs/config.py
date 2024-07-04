@@ -14,7 +14,7 @@ from detect_malignant.src.configs.misc_config import ( EarlyStoppingConfig,
 from detect_malignant.src.loader.dataset import MalignantDataset
 from detect_malignant.src.losses.loss import MalignantLoss
 from detect_malignant.src.models.senet import SENet
-from detect_malignant.src.models.efficientnet import EfficientNet
+from detect_malignant.src.models.densenet import DenseNet_
 
 
 
@@ -27,7 +27,7 @@ class ExperimentationConfig(BaseModel):
 
     models: ClassVar[Dict[str, torch.nn.Module]] = {
         "SENet": SENet,
-        "EfficientNet": EfficientNet, 
+        "DenseNet": DenseNet_, 
              
     }
 
