@@ -24,12 +24,8 @@ lib-cov/
 coverage/
 *.lcov
 
-# Images
-*.jpg
-*.png
 
 # Data files
-*.csv
 *.pt
 *.pth
 *.pkl
