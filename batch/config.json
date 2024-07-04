@@ -1,0 +1,71 @@
+{
+    "exp_name": "test",   
+    "model_name": "SENet",
+    "model_kwargs": {
+        
+        "num_classes": 2,
+        "pretrained": "imagenet"
+    },
+  
+    "save_dir": "experiments",  
+    "epochs": 10,
+    "batch_size": 200,
+    "initial_model_num_classes": 43,
+    "imsize": 244,
+    "debug": false,
+    "early_stopping_kwargs": {
+      "patience": 20,
+      "min_delta": 0.001,
+      "watched_metric": "macro_f1",
+      "watched_metric_polarity": "Positive"
+    },
+   
+    "num_workers": 15,
+    "optimizer": "Ranger",
+    "optimizer_kwargs": {
+      "mom": 0.9,
+      "eps": 1e-08,
+      "lr": 1e-04
+    },
+    "scheduler": "SchedCos",
+    "scheduler_kwargs": {
+      "start": 0.1,
+      "end": 1e-09
+      
+    },
+   
+    "loss": "MalignantLoss",
+    "loss_kwargs": {
+        "loss_dict": {
+          "FocalLoss": {
+            "weight": 1.0,
+            "mag_scale": 1.0,
+            "gamma": 3.0
+          }
+        },
+        "genus": false
+      }
+    ,
+    "metrics": [
+      "accuracy",
+      "macro_f1"
+    ],
+    "kwagrs_learner": {
+      "weight_decay": 0.01,
+      "cbs": [
+        "best_save_cb",
+        "save_train_result_cb",
+        "lr_sched_cb",
+        "early_stoppping_cb"
+    
+      ],
+      "lr": 1e-04,
+      "extra_train_args": {}
+    },
+    "datasheet_path": "datasheets/data.csv"
+    
+  
+  
+      
+    
+  }
