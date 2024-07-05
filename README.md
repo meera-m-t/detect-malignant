@@ -44,5 +44,5 @@ python -m  detect_malignant --exp-name  experiments/example/ --mode test
 
 ## Preprocessing Overview
 
-Our preprocessing pipeline focuses on extracting the ROI and removing hair from the images. However, the preprocessing methods need further refinement. We believe that clustering the dataset into various groups, each with tailored preprocessing, Ingeneral, these methods  need to discuss with specialists in medical imaging for better insights (to know the  target goal exactly)
+Our preprocessing pipeline focuses on extracting the ROI and removing hair from the images. However, the preprocessing methods need further refinement. We believe that clustering the dataset into various groups, each with tailored preprocessing, will improve model performance. These methods need to be discussed with specialists in medical imaging for better insights and to understand the target goals more clearly.
     
