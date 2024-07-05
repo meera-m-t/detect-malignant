@@ -1,0 +1,68 @@
+{
+  "exp_name": "exp3",
+  "model_name": "DenseNet",
+  "save_dir": "experiments",
+  "mode": "train",
+  "epochs": 100,
+  "batch_size": 200,
+  "imsize": 224,
+  "early_stopping_kwargs": {
+    "patience": 10,
+    "min_delta": 0.01,
+    "watched_metric": "macro_f1",
+    "watched_metric_polarity": "Positive"
+  },
+  "num_workers": 15,
+  "optimizer": "Ranger",
+  "optimizer_kwargs": {
+    "mom": 0.9,
+    "eps": 1e-08,
+    "lr": 0.1
+  },
+  "scheduler": "SchedCos",
+  "scheduler_kwargs": {
+    "start": 0.1,
+    "end": 1e-09
+  },
+  "model_kwargs": {
+    "num_classes": 2,
+    "pretrained": true
+  },
+  "loss": "MalignantLoss",
+  "loss_kwargs": {
+    "loss_dict": {
+      "FocalLoss": {
+        "weight": 1.0,
+        "mag_scale": 1.0,
+        "gamma": 3.0
+      }
+    }
+  },
+  "metrics": [
+    "accuracy",
+    "macro_f1"
+  ],
+  "datasheet_path": "datasheets/data.csv",
+  "device": "cuda",
+  "device_ids": [
+    0,
+    1,
+    2
+  ],
+  "dataset": "MalignantDataset",
+  "kwargs_augmentation": {
+    "p": 1,
+    "setting": 0
+  },
+  "one_hot_labels": false,
+  "kwagrs_learner": {
+    "weight_decay": 0.01,
+    "cbs": [
+      "best_save_cb",
+      "save_train_result_cb"
+    ],
+    "lr": 0.1,
+    "extra_train_args": {}
+  },
+  "verbose": false
+}

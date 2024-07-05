@@ -3,6 +3,7 @@ import cv2
 import numpy as np
 import pandas as pd
 import torch
+import time
 
 from PIL import Image
 from torch.utils.data import Dataset
@@ -63,8 +64,11 @@ class MalignantDataset(Dataset):
 
         if img is None:
             return self.__getitem__((idx + 1) % self.__len__())
+        
+        img = self.transform.tv_remove_hair(np.array(img))
+      
         if self.mode == "Train":            
-            img = self.transform.alb_transform_train(img)
+            img = self.transform.alb_transform_train(np.array(img))
 
         # cv2.imwrite(f"img_{time.time()}.jpg", img)
         img = self.transform.tv_transform(np.array(img))     

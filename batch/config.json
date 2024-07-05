@@ -1,5 +1,5 @@
 {
-    "exp_name": "exp2",   
+    "exp_name": "exp3",   
     "model_name": "DenseNet",
     "model_kwargs": {
         
