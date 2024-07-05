@@ -9,9 +9,6 @@ lerna-debug.log*
 # Python Scripts
 create_newcsv.py
 
-# Jupyter Notebooks
-.ipynb_checkpoints/
-*.ipynb
 
 # Runtime Data
 pids/
