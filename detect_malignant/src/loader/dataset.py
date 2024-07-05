@@ -70,7 +70,7 @@ class MalignantDataset(Dataset):
         if self.mode == "Train":            
             img = self.transform.alb_transform_train(np.array(img))
 
-        # cv2.imwrite(f"img_{time.time()}.jpg", img)
+        # cv2.imwrite(f"img_{time.time()}.jpg", img)     
         img = self.transform.tv_transform(np.array(img))     
         return img, label
 

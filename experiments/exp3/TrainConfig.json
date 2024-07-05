@@ -2,7 +2,7 @@
   "exp_name": "exp3",
   "model_name": "DenseNet",
   "save_dir": "experiments",
-  "mode": "train",
+  "mode": "finetune",
   "epochs": 100,
   "batch_size": 200,
   "imsize": 224,

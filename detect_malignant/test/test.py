@@ -71,7 +71,7 @@ def test(experiment_dir: str, config=None):
         model = model.to(device)
         
 
-        model.load_state_dict(torch.load(experiment_dir + "/best_f1.pth"))      
+        model.load_state_dict(torch.load(experiment_dir + "/best_acc.pth"))      
 
         if len(config.device_ids) > 1:
             model = torch.nn.DataParallel(model, device_ids=config.device_ids)

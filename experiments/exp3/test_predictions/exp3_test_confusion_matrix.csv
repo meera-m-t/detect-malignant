@@ -1,0 +1,3 @@
+,Benign,Malignant
+Benign,0.933,0.067
+Malignant,0.128,0.872

@@ -29,7 +29,7 @@ class RemoveHair:
         
         # Filter out small contours
         for contour in contours:
-            if cv2.contourArea(contour) < 50:  
+            if cv2.contourArea(contour) < 70:  
                 cv2.drawContours(mask1, [contour], -1, 0, -1)
         
         # Create the inverse mask
@@ -39,7 +39,7 @@ class RemoveHair:
         result_image = cv2.bitwise_and(image, image, mask=inverse_mask1)
         
         # Inpaint the masked areas
-        inpainted_image = cv2.inpaint(result_image, mask1, inpaintRadius=3, flags=cv2.INPAINT_TELEA)
+        inpainted_image = cv2.inpaint(result_image, mask1, inpaintRadius=1, flags=cv2.INPAINT_TELEA)
         
         # Convert back to PIL Image
         inpainted_image = Image.fromarray(inpainted_image)
