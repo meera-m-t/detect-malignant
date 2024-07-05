@@ -54,7 +54,7 @@ class HairRemovalAndSegmentation:
             scale_factor = 1.5
             radius = int(max(w, h) // 2 * scale_factor)
             
-            # Constrain the radius to be within the image dimensions
+
             radius = min(radius, center[0], center[1], image.shape[1] - center[0], image.shape[0] - center[1])
            
             mask = np.zeros_like(gray)
@@ -72,9 +72,9 @@ class HairRemovalAndSegmentation:
             if row['Cluster'] in self.clusters:
                 self.remove_hair_and_segment(row['Id'])
 
-# Usage
-csv_path = 'datasheets/clustered_data.csv'  # Replace with your CSV file path
-clusters = [0, 1, 2]  # Replace with your cluster choices
+
+csv_path = 'datasheets/clustered_data.csv' 
+clusters = [0, 1, 2]  
 
 processor = HairRemovalAndSegmentation(csv_path, clusters)
 processor.process_images()
