@@ -16,7 +16,7 @@ For training:
 Execute the following command to run the system:
 
 ```bash
-python -m detect_malignant --config batch/config.py
+python -m detect_malignant --config batch/config.json
 ```
 For testing :
 
