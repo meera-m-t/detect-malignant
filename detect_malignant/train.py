@@ -52,7 +52,7 @@ def train_model(model, config, config_paths, config_train, num_classes, logger):
 
 
 
-    data = DataLoaders(*get_fastai_dataloaders(config, train_set, valid_set), device=config.device  )  
+    data = DataLoaders(*get_fastai_dataloaders(config, train_set, valid_set))  
    
     # logger.log(summary(model=model, input_size=train_set[0][0].shape))
   

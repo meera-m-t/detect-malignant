@@ -65,7 +65,7 @@ class MalignantDataset(Dataset):
         if img is None:
             return self.__getitem__((idx + 1) % self.__len__())
         
-        img = self.transform.tv_remove_hair(np.array(img))
+      
       
         if self.mode == "Train":            
             img = self.transform.alb_transform_train(np.array(img))
@@ -91,8 +91,8 @@ class MalignantDataset(Dataset):
 
 def get_fastai_dataloaders(config, train_Dataset, valid_Dataset) -> list:
     world_size = torch.cuda.device_count()
-    rank = int(os.getenv('LOCAL_RANK', '0'))  
-    sampler = DistributedSampler(train_Dataset, num_replicas=world_size, rank=rank, shuffle=True)
+    # rank = int(os.getenv('LOCAL_RANK', '0'))  
+    # sampler = DistributedSampler(train_Dataset, num_replicas=world_size, rank=rank, shuffle=True)
     train_dl = FastDataLoader(
         train_Dataset,
         batch_sampler=ImbalancedDatasetSampler(train_Dataset),
@@ -101,9 +101,9 @@ def get_fastai_dataloaders(config, train_Dataset, valid_Dataset) -> list:
         num_workers=config.num_workers,
         pin_memory=True,
         drop_last=True,  # change here
-        sampler = sampler
+        # sampler = sampler
     )
-    sampler = DistributedSampler(valid_Dataset, num_replicas=world_size, rank=rank, shuffle=False)
+    # sampler = DistributedSampler(valid_Dataset, num_replicas=world_size, rank=rank, shuffle=False)
     valid_dl = FastDataLoader(
         valid_Dataset,
         batch_size=config.batch_size,      

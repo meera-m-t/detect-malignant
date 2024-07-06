@@ -7,44 +7,6 @@ from albumentations import (Compose, Flip, GaussNoise,  RandomRotate90, ShiftSca
 from albumentations.augmentations.transforms import ColorJitter
 
 
-class RemoveHair:
-    def __call__(self, image):
-        # Convert PIL Image to NumPy array
-        image = np.array(image)
-        
-        # Convert to grayscale
-        gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-        
-        # Define the kernel for the blackhat operation
-        kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (5, 5))
-        
-        # Apply blackhat operation
-        blackhat = cv2.morphologyEx(gray, cv2.MORPH_BLACKHAT, kernel)
-        
-        # Threshold the blackhat image
-        _, mask1 = cv2.threshold(blackhat, 10, 255, cv2.THRESH_BINARY)
-        
-        # Find contours in the mask
-        contours, _ = cv2.findContours(mask1, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-        
-        # Filter out small contours
-        for contour in contours:
-            if cv2.contourArea(contour) < 70:  
-                cv2.drawContours(mask1, [contour], -1, 0, -1)
-        
-        # Create the inverse mask
-        inverse_mask1 = cv2.bitwise_not(mask1)
-        
-        # Apply the mask to the original image
-        result_image = cv2.bitwise_and(image, image, mask=inverse_mask1)
-        
-        # Inpaint the masked areas
-        inpainted_image = cv2.inpaint(result_image, mask1, inpaintRadius=1, flags=cv2.INPAINT_TELEA)
-        
-        # Convert back to PIL Image
-        inpainted_image = Image.fromarray(inpainted_image)
-        
-        return inpainted_image
 
 class CustomCombinedTransform:
     def __init__(
@@ -64,7 +26,7 @@ class CustomCombinedTransform:
       
         self.alb_transform_train = self.alb_transform_train(self.p, self.setting)        
         self.tv_transform = self.tv_transform()
-        self.tv_remove_hair = self.tv_remove_hair(self.imsize)
+
 
 
     @staticmethod
@@ -121,13 +83,7 @@ class CustomCombinedTransform:
 
         return apply_transform
 
-    def tv_remove_hair(self, imsize=224):
-        tv_transform = T.Compose([
-                RemoveHair(),                 
-                T.Resize((imsize, imsize)),            
-            ]
-        )
-        return tv_transform
+   
     
     def tv_transform(self):
         tv_transform = T.Compose(

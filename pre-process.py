@@ -74,7 +74,7 @@ class HairRemovalAndSegmentation:
 
 
 csv_path = 'datasheets/clustered_data.csv' 
-clusters = [0, 1, 2]  
+clusters = [0, 1, 2, 3]  
 
 processor = HairRemovalAndSegmentation(csv_path, clusters)
 processor.process_images()

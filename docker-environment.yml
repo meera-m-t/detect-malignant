@@ -1,0 +1,22 @@
+name: my-docker-environment
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - python=3.10
+  - pip
+  - pip:
+    - timm
+    - densenet_pytorch
+    - tensorboard
+    - seaborn
+    - IPython
+    - black
+    - isort
+    - albumentations
+    - torchsampler
+    - pretrainedmodels
+    - fastai
+    - torch>=1.4
+    - torchvision
+    - torchsummary
