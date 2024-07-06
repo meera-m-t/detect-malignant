@@ -8,3 +8,5 @@ micromamba activate my-docker-environment
 
 # Run the main application
 exec python -m detect_malignant --config batch/config.json
+#if you want to run jupyter 
+# jupyter lab --ip=0.0.0.0 --allow-root
