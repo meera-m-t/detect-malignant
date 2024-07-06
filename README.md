@@ -45,4 +45,26 @@ python -m  detect_malignant --exp-name  experiments/example/ --mode test
 ## Preprocessing Overview
 
 Our preprocessing pipeline focuses on extracting the ROI and removing hair from the images. However, the preprocessing methods need further refinement. We believe that clustering the dataset into various groups, each with tailored preprocessing, will improve model performance. These methods need to be discussed with specialists in medical imaging for better insights and to understand the target goals more clearly.
+
+
+
+## Docker Run
+### Build
+
+To build the Docker image, use the following command:
+
+```bash
+docker build -t detect-malignant .
+
+```
+
+### Run 
+To run the Docker container, execute the command below. This allocates 8GB of shared memory and utilizes all available GPUs:
+
+``` bash
+sudo docker run --shm-size=8g -it --rm detect-malignant /bin/bash gpus=all
+
+
+```
+
     
