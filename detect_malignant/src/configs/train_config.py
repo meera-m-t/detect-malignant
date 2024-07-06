@@ -80,7 +80,7 @@ class TrainConfig(BaseModel):
             return []
     def get_loss(self, num_classes) -> Callable:
         device = self.expconfig.device
-        if self.expconfig.loss == "MalignantLoss":
+        if self.expconfig.loss == "MalignantLoss" or self.expconfig.loss == "SmartCrossEntropyLoss":
             return self.expconfig.losses[self.expconfig.loss](self.expconfig.loss_kwargs, num_classes, self.expconfig.loss_kwargs["loss_dict"]).to(device)
         else:
             raise ValueError(f"Invalid loss: {self.expconfig.loss}")

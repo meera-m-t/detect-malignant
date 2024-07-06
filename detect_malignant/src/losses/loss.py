@@ -1,5 +1,6 @@
 import torch
 import torch.nn as nn
+import torch.nn.functional as F
 
 
 
@@ -59,4 +60,24 @@ class FocalLoss(nn.Module):
         focal_loss = (invprobs * self.gamma).exp() * base_loss
 
         return focal_loss.sum(dim=1).mean()
+
+
+class SmartCrossEntropyLoss(torch.nn.Module):
+    def __init__(self,  config, num_classes, loss_dict, label_smoothing=0.1):
+        super(SmartCrossEntropyLoss, self).__init__()
+        self.label_smoothing = label_smoothing
+
+    def forward(self, logits, targets):
+        num_classes = logits.size(-1)
+        with torch.no_grad():
+            # Convert targets to one-hot encoding
+            true_dist = torch.zeros_like(logits)
+            true_dist.fill_(self.label_smoothing / (num_classes - 1))
+            true_dist.scatter_(1, targets.data.unsqueeze(1), 1.0 - self.label_smoothing)
+
+        log_probabilities = F.log_softmax(logits, dim=-1)
+        loss = -torch.sum(true_dist * log_probabilities, dim=-1).mean()
+        return loss
+
+
 

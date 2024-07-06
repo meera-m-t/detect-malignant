@@ -12,7 +12,7 @@ from detect_malignant.src.configs.misc_config import ( EarlyStoppingConfig,
                                                       SchedulerConfig,
                                                                )
 from detect_malignant.src.loader.dataset import MalignantDataset
-from detect_malignant.src.losses.loss import MalignantLoss
+from detect_malignant.src.losses.loss import MalignantLoss, SmartCrossEntropyLoss
 from detect_malignant.src.models.senet import SENet
 from detect_malignant.src.models.densenet import DenseNet_
 
@@ -87,6 +87,7 @@ class ExperimentationConfig(BaseModel):
 
     losses: ClassVar[Dict[str, Type]] = {
         "MalignantLoss": MalignantLoss,
+        "SmartCrossEntropyLoss": SmartCrossEntropyLoss,
         
     }
 
